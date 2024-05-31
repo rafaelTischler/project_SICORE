@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/BackgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context=".activity.FormLogin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/txt_sicore"
+            style="@style/TextView.BigTitle"
+            android:layout_marginTop="96dp"
+            android:text="@string/sicore"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="296dp" />
+
+        <TextView
+            android:id="@+id/txt_titleLogin"
+            style="@style/TextView.Title"
+            android:layout_marginTop="96dp"
+            android:text="@string/realizar_login"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sicore"
+            app:layout_constraintWidth_max="296dp" />
+
+        <EditText
+            android:id="@+id/edit_email"
+            style="@style/Base.EditText"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="48dp"
+            android:autoLink="email"
+            android:autofillHints="emailAddress"
+            android:hint="@string/endereco_de_email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_titleLogin"
+            app:layout_constraintWidth_max="296dp" />
+
+        <EditText
+            android:id="@+id/edit_password"
+            style="@style/Base.EditText"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="48dp"
+            android:autofillHints="password"
+            android:hint="@string/senha"
+            android:inputType="textPassword"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_email"
+            app:layout_constraintWidth_max="296dp" />
+
+        <TextView
+            android:id="@+id/txt_forgotPass"
+            style="@style/TextView.SmallText"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="48dp"
+            android:contentDescription="@string/desc_txt_forgotPass"
+            android:text="@string/esqueceu_sua_senha"
+            android:textAlignment="textEnd"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_password"
+            app:layout_constraintWidth_max="296dp" />
+
+        <Button
+            android:id="@+id/btn_entrar"
+            style="@style/BaseButton"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="48dp"
+            android:backgroundTint="@color/primaryColorVariant"
+            android:contentDescription="@string/desc_btn_entrar"
+            android:text="@string/entrar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_forgotPass"
+            app:layout_constraintWidth_max="296dp" />
+
+        <TextView
+            android:id="@+id/txt_ou"
+            style="@style/TextView.SmallText"
+            android:layout_marginTop="4dp"
+            android:text="@string/ou"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_entrar"
+            app:layout_constraintWidth_max="296dp" />
+
+        <Button
+            android:id="@+id/btn_loginGoogle"
+            style="@style/BaseButton"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="48dp"
+            android:contentDescription="@string/desc_btn_loginGoogle"
+            android:text="@string/entrar_com_o_google"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_ou"
+            app:layout_constraintWidth_max="296dp" />
+
+        <TextView
+            android:id="@+id/txt_tela_cadastro"
+            style="@style/TextView.SmallText"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="48dp"
+            android:contentDescription="@string/desc_txt_tela_cadastro"
+            android:text="@string/ainda_nao_possui_uma_conta_cadastrar_se"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_loginGoogle"
+            app:layout_constraintWidth_max="296dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

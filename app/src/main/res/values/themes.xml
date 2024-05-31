@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Project_SICORE" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryColorVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryColorVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+    </style>
+
+    <style name="Theme.Project_SICORE" parent="Base.Theme.Project_SICORE" />
+
+    <style name="BackgroundColor">
+        <item name="android:background">@color/backgroundColor</item>
+    </style>
+
+    <style name="TextColor">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ButtonColorPrimary">
+        <item name="android:backgroundTint">@color/primaryColor</item>
+    </style>
+
+    <style name="ButtonColorPrimary_Variant">
+        <item name="android:backgroundTint">@color/primaryColorVariant</item>
+    </style>
+
+    <style name="ButtonColorSecondary">
+        <item name="backgroundTint">@color/secondaryColor</item>
+    </style>
+</resources>

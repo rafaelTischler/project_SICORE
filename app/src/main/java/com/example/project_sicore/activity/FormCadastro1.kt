@@ -15,8 +15,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
 import Usuario
 import android.util.Log
+import android.widget.EditText
+
 class FormCadastro1 : AppCompatActivity() {
 
+    var usuario = Usuario();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +31,7 @@ class FormCadastro1 : AppCompatActivity() {
             insets
         }
 
-        val usuario = intent.getSerializableExtra("usuario") as? Usuario
+        usuario = intent.getSerializableExtra("usuario") as Usuario
         usuario?.let {
             // O objeto Usuario não é nulo, você pode usá-lo com segurança aqui
             Log.d("FormCadastro1", "Objeto Usuario: ${usuario.nome}")}
@@ -58,7 +61,16 @@ class FormCadastro1 : AppCompatActivity() {
         val btnEtapa3: Button = this.findViewById(R.id.btn_proximo)
         btnEtapa3.setOnClickListener {
             val intent = Intent(this, FormCadastro2::class.java)
+            pegarValoresInputs();
+            intent.putExtra("usuario", usuario)
             startActivity(intent)
         }
+    }
+
+    fun pegarValoresInputs(){
+        var EditTextEmail = findViewById<EditText>(R.id.edit_create_email)
+        var EditTextSenha = findViewById<EditText>(R.id.edit_create_password)
+        usuario.email = EditTextEmail.text.toString();
+        usuario.senha = EditTextSenha.text.toString();
     }
 }

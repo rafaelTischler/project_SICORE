@@ -22,8 +22,7 @@ class FormCadastro2 : AppCompatActivity() {
 
         val btnVoltarEtapa2: Button = this.findViewById(R.id.btn_voltar)
         btnVoltarEtapa2.setOnClickListener {
-            val intent = Intent(this, FormCadastro1::class.java)
-            startActivity(intent)
+            this.finish();
         }
     }
 }

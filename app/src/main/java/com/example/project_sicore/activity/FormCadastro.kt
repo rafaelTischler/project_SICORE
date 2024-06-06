@@ -1,5 +1,6 @@
 package com.example.project_sicore.activity
 
+import Usuario
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -7,14 +8,17 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
-
 class FormCadastro : AppCompatActivity() {
+
+    var usuario = Usuario()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,6 +28,7 @@ class FormCadastro : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         //Variável para armazenar o TextView da referência para a tela de Login
         val txtTelaLogin: TextView = this.findViewById(R.id.txt_tela_login)
         //Variável para armazenar o Button de Próximo
@@ -49,12 +54,25 @@ class FormCadastro : AppCompatActivity() {
         //Função que permite prosseguir pra proxima etapa do Cadastro
         btnEtapa2.setOnClickListener {
             val intent = Intent(this, FormCadastro1::class.java)
+            pegarValoresInputs()
+            intent.putExtra("usuario",usuario)
             startActivity(intent)
         }
         //Função que permite voltar à tela de Login
         btnVoltarLogin.setOnClickListener {
-            val intent = Intent(this, FormLogin::class.java)
-            startActivity(intent)
+            this.finish();
         }
+    }
+
+    fun pegarValoresInputs() {
+        var editTextNome = findViewById<EditText>(R.id.edit_username);
+        var editTextCpfOrCnpj = findViewById<EditText>(R.id.edit_cpfcnpj)
+        var editTextDataNasci = findViewById<EditText>(R.id.edit_nascimento)
+        var editTextTelefone = findViewById<EditText>(R.id.edit_phone)
+        // validarDados() // Criar funcao para validadr dados
+        usuario.nome = editTextNome.text.toString()
+        usuario.cpf = editTextCpfOrCnpj.text.toString()
+        usuario.dataNasci = editTextDataNasci.text.toString()
+        usuario.telefone = editTextTelefone.text.toString()
     }
 }

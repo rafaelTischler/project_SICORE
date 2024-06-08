@@ -1,4 +1,4 @@
-package com.example.project_sicore.activity
+package com.example.project_sicore.activity.cadastro
 
 import android.content.Intent
 import android.graphics.Typeface
@@ -16,6 +16,7 @@ import com.example.project_sicore.R
 import Usuario
 import android.util.Log
 import android.widget.EditText
+import com.example.project_sicore.activity.login.FormLogin
 
 class FormCadastro1 : AppCompatActivity() {
 
@@ -70,7 +71,13 @@ class FormCadastro1 : AppCompatActivity() {
     fun pegarValoresInputs(){
         var EditTextEmail = findViewById<EditText>(R.id.edit_create_email)
         var EditTextSenha = findViewById<EditText>(R.id.edit_create_password)
+        var EditTextConfEmail = findViewById<EditText>(R.id.edit_confirm_email)
+        var EditTextConfSenha = findViewById<EditText>(R.id.edit_confirm_password)
+
         usuario.email = EditTextEmail.text.toString();
         usuario.senha = EditTextSenha.text.toString();
+        usuario.confEmail = EditTextConfEmail.text.toString();
+        usuario.confSenha = EditTextConfSenha.text.toString();
+
     }
 }

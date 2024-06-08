@@ -1,4 +1,4 @@
-package com.example.project_sicore.activity
+package com.example.project_sicore.activity.recuperarConta
 
 import android.content.Intent
 import android.os.Bundle

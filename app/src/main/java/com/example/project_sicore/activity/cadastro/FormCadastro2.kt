@@ -1,4 +1,4 @@
-package com.example.project_sicore.activity
+package com.example.project_sicore.activity.cadastro
 
 import Usuario
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
+import com.example.project_sicore.activity.temp.TELAMOSTRARRESULTADO
 
 class FormCadastro2 : AppCompatActivity() {
 
@@ -51,5 +52,6 @@ class FormCadastro2 : AppCompatActivity() {
         usuario.endereco.cidade = EditTextCidade.text.toString()
         usuario.endereco.bairro = EditTextBairro.text.toString()
         usuario.endereco.rua = EditTextRua.text.toString()
+
     }
 }

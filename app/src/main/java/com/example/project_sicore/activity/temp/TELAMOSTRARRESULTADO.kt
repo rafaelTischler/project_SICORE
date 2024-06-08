@@ -1,4 +1,4 @@
-package com.example.project_sicore.activity
+package com.example.project_sicore.activity.temp
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -8,7 +8,10 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
 import Usuario
 import android.widget.TextView
+import com.example.sicore.crud
+import com.google.gson.Gson
 import org.json.JSONObject
+
 class TELAMOSTRARRESULTADO : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +48,10 @@ class TELAMOSTRARRESULTADO : AppCompatActivity() {
 
         // Convertendo o JSON de volta para uma string
         val jsonAsString = jsonObject.toString()
-
+        var crudApi = crud()
+        crudApi.CriaUsuario(usuario)
         var textViewJson: TextView = findViewById(R.id.resJson)
         textViewJson.text = jsonAsString
+
     }
 }

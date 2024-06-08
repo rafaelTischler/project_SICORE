@@ -1,4 +1,4 @@
-package com.example.project_sicore.activity
+package com.example.project_sicore.activity.login
 
 import android.content.Intent
 import android.graphics.Typeface
@@ -6,52 +6,48 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
+import com.example.project_sicore.activity.recuperarConta.FormForgotPassword
+import com.example.project_sicore.activity.cadastro.FormCadastro
 
-class UserTypeScreen : AppCompatActivity() {
+class FormLogin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_user_type_screen)
+        setContentView(R.layout.activity_form_login)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        val spannable = SpannableString("Está com dúvida? Deixe-nos ajudar")
+        val txtTelaCadastro: TextView = this.findViewById(R.id.txt_tela_cadastro)
+        val txtTelaEsqueceu: TextView = this.findViewById(R.id.txt_forgotPass)
+
+        //Função que define apenas o "Cadastre-se" como negrito ao iniciar a Activity
+        val spannable = SpannableString("Ainda não possui uma conta? Cadastre-se")
         spannable.setSpan(
             StyleSpan(Typeface.BOLD),
-            spannable.length - 16,
+            spannable.length - 11,
             spannable.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        val txtDuvida: TextView = this.findViewById(R.id.txt_peca_ajuda)
-        txtDuvida.text = spannable
-
-        val btnCooperativa: ImageButton = this.findViewById(R.id.btn_cooperativa)
-        val btnCatador: ImageButton = this.findViewById(R.id.btn_catador)
-        val btnDepositante: ImageButton = this.findViewById(R.id.btn_depositante)
-
-        btnCooperativa.setOnClickListener {
-            val intent = Intent(this, FormLogin::class.java)
+        //Função que cria o link do TextView para a Activity de Cadastro
+        txtTelaCadastro.text = spannable
+        txtTelaCadastro.setOnClickListener {
+            val intent = Intent(this, FormCadastro::class.java)
             startActivity(intent)
         }
-        btnCatador.setOnClickListener {
-            val intent = Intent(this, FormLogin::class.java)
+        //Função que cria o link do TextView para a Activity de Esqueceu a Senha
+        txtTelaEsqueceu.setOnClickListener {
+            val intent = Intent(this, FormForgotPassword::class.java)
             startActivity(intent)
         }
-        btnDepositante.setOnClickListener {
-            val intent = Intent(this, FormLogin::class.java)
-            startActivity(intent)
-        }
-
     }
 }

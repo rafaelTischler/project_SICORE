@@ -1,6 +1,5 @@
 package com.example.project_sicore.activity.cadastro
 
-import Usuario
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
@@ -16,10 +15,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
 import com.example.project_sicore.activity.login.FormLogin
+import com.example.project_sicore.databinding.ActivityFormCadastroBinding
+import com.example.project_sicore.utils.modelos.UsuarioCadastroRequest
 
 class FormCadastro : AppCompatActivity() {
 
-    var usuario = Usuario()
+    private lateinit var binding: ActivityFormCadastroBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +32,9 @@ class FormCadastro : AppCompatActivity() {
             insets
         }
 
-        //Variável para armazenar o TextView da referência para a tela de Login
-        val txtTelaLogin: TextView = this.findViewById(R.id.txt_tela_login)
-        //Variável para armazenar o Button de Próximo
-        val btnEtapa2: Button = this.findViewById(R.id.btn_proximo)
-        //Variável para armazenar o Button de Voltar
-        val btnVoltarLogin: Button = this.findViewById(R.id.btn_voltar_login)
+        binding = ActivityFormCadastroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
 
         //Função que define apenas o "Login" como negrito ao iniciar a Activity
         val spannable = SpannableString("Já possui uma conta? Login")
@@ -47,35 +45,29 @@ class FormCadastro : AppCompatActivity() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        //Função que cria o link do TextView para a Activity de Login
-        txtTelaLogin.text = spannable
-        txtTelaLogin.setOnClickListener {
+        binding.txtTelaLogin.text = spannable
+        binding.txtTelaLogin.setOnClickListener(){
             val intent = Intent(this, FormLogin::class.java)
             startActivity(intent)
         }
-        //Função que permite prosseguir pra proxima etapa do Cadastro
-        btnEtapa2.setOnClickListener {
+
+        binding.btnProximo.setOnClickListener() {
             val intent = Intent(this, FormCadastro1::class.java)
-            pegarValoresInputs()
+            val usuario = pegarDadosInput()
             intent.putExtra("usuario",usuario)
             startActivity(intent)
         }
-        //Função que permite voltar à tela de Login
-        btnVoltarLogin.setOnClickListener {
+
+        binding.btnVoltarLogin.setOnClickListener(){
             this.finish();
         }
     }
-
-    fun pegarValoresInputs() {
-        var editTextNome = findViewById<EditText>(R.id.edit_username);
-        var editTextCpfOrCnpj = findViewById<EditText>(R.id.edit_cpfcnpj)
-        var editTextDataNasci = findViewById<EditText>(R.id.edit_nascimento)
-        var editTextTelefone = findViewById<EditText>(R.id.edit_phone)
-        // validarDados() // Criar funcao para validadr dados
-        usuario.nome = editTextNome.text.toString()
-        usuario.cpf = editTextCpfOrCnpj.text.toString()
-        usuario.dataNasci = editTextDataNasci.text.toString()
-        usuario.telefone = editTextTelefone.text.toString()
-
+    private fun pegarDadosInput() : UsuarioCadastroRequest{
+        val nome = binding.editUsername.text.toString()
+        val cpfOuCnpj = binding.editCpfcnpj.text.toString()
+        val dataNascimento = binding.editNascimento.text.toString()
+        val telefone = binding.editPhone.text.toString()
+        return UsuarioCadastroRequest(nome = nome, cpf = cpfOuCnpj, dataNasci = dataNascimento, telefone = telefone)
     }
+
 }

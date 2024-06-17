@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
-import Usuario
 import android.widget.TextView
-import com.example.sicore.crud
-import com.google.gson.Gson
+import com.example.project_sicore.utils.modelos.UsuarioCadastroRequest
+//import com.example.sicore.crud
 import org.json.JSONObject
 
 class TELAMOSTRARRESULTADO : AppCompatActivity() {
@@ -23,7 +22,7 @@ class TELAMOSTRARRESULTADO : AppCompatActivity() {
             insets
         }
 
-        var usuario = intent.getSerializableExtra("usuario") as Usuario
+        var usuario = intent.getSerializableExtra("usuario") as UsuarioCadastroRequest
 
         // Pedi pro gpt faze pra mim, colocar bib Gson()
         val jsonObject = JSONObject()
@@ -48,8 +47,8 @@ class TELAMOSTRARRESULTADO : AppCompatActivity() {
 
         // Convertendo o JSON de volta para uma string
         val jsonAsString = jsonObject.toString()
-        var crudApi = crud()
-        crudApi.CriaUsuario(usuario)
+
+
         var textViewJson: TextView = findViewById(R.id.resJson)
         textViewJson.text = jsonAsString
 

@@ -1,6 +1,9 @@
-import java.io.Serializable
+package com.example.project_sicore.utils.modelos
 
-class Endereco : Serializable {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+@Parcelize
+class EnderecoRequest : Parcelable {
     var cep: String = ""
     var pais: String = ""
     var estado: String = ""

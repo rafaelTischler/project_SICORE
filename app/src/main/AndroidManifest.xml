@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--    INTERNET    -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--    LOCALIZACAO -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,13 +19,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project_SICORE"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <!--
+            Pegar chave API
+         -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${GOOGLE_MAPS_API_KEY}"/>
         <activity
-            android:name=".activity.UserTypeScreen"
-            android:exported="false"
-            android:screenOrientation="portrait" />
+            android:name=".activity.Mapa.Mapa"
+            android:exported="false" />
         <activity
-            android:name=".activity.SplashScreen"
+            android:name=".activity.temp.TELAMOSTRARRESULTADO"
+            android:exported="false" />
+        <activity
+            android:name=".activity.carregamento.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -27,35 +45,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.FormCadastro2"
+            android:name=".activity.cadastro.FormCadastro2"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FormRedefinePassword"
+            android:name=".activity.recuperarConta.FormRedefinePassword"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FormRecoveryCode"
+            android:name=".activity.recuperarConta.FormRecoveryCode"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FormForgotPassword"
+            android:name=".activity.recuperarConta.FormForgotPassword"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FormCadastro1"
+            android:name=".activity.cadastro.FormCadastro1"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.FormCadastro"
+            android:name=".activity.cadastro.FormCadastro"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MainActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.FormLogin"
+            android:name=".activity.login.FormLogin"
             android:exported="false"
             android:screenOrientation="portrait" />
 

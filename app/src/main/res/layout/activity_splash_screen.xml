@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    tools:context=".activity.SplashScreen">
+    tools:context=".activity.carregamento.SplashScreen">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"

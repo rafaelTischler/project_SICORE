@@ -1,4 +1,4 @@
-package com.example.project_sicore.activity
+package com.example.project_sicore.activity.cadastro
 
 import android.content.Intent
 import android.graphics.Typeface
@@ -13,8 +13,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
+import android.util.Log
+import android.widget.EditText
+import com.example.project_sicore.activity.login.FormLogin
+import com.example.project_sicore.databinding.ActivityFormCadastro1Binding
+import com.example.project_sicore.utils.modelos.UsuarioCadastroRequest
 
 class FormCadastro1 : AppCompatActivity() {
+
+    private lateinit var usuario : UsuarioCadastroRequest
+    private lateinit var binding: ActivityFormCadastro1Binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -25,7 +33,9 @@ class FormCadastro1 : AppCompatActivity() {
             insets
         }
 
-        val txtTelaLogin: TextView = this.findViewById(R.id.txt_tela_login)
+        usuario = intent.getParcelableExtra("usuario") ?: UsuarioCadastroRequest()
+        binding = ActivityFormCadastro1Binding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //Função que define apenas o "Login" como negrito ao iniciar a Activity
         val spannable = SpannableString("Já possui uma conta? Login")
@@ -36,22 +46,29 @@ class FormCadastro1 : AppCompatActivity() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
         //Função que cria o link do TextView para a Activity de Login
-        txtTelaLogin.text = spannable
-        txtTelaLogin.setOnClickListener {
+        binding.txtTelaLogin.text = spannable
+        binding.txtTelaLogin.setOnClickListener {
             val intent = Intent(this, FormLogin::class.java)
             startActivity(intent)
         }
-
-        val btnVoltarEtapa1: Button = this.findViewById(R.id.btn_voltar)
-        btnVoltarEtapa1.setOnClickListener {
-            val intent = Intent(this, FormCadastro::class.java)
-            startActivity(intent)
+        binding.btnVoltar.setOnClickListener {
+            this.finish();
         }
-
-        val btnEtapa3: Button = this.findViewById(R.id.btn_proximo)
-        btnEtapa3.setOnClickListener {
+        binding.btnProximo.setOnClickListener {
             val intent = Intent(this, FormCadastro2::class.java)
+            pegarDadosInput();
+            intent.putExtra("usuario", usuario)
             startActivity(intent)
         }
+    }
+
+    private fun pegarDadosInput(){
+        val email = binding.editCreateEmail.text.toString()
+        val confEmail = binding.editConfirmEmail.text.toString()
+        val senha = binding.editCreatePassword.text.toString()
+        val confSenha =binding.editConfirmPassword.text.toString()
+        //validar Dados
+        usuario.email = email
+        usuario.senha = senha
     }
 }

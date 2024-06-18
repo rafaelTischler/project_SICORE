@@ -5,7 +5,7 @@
     style="@style/BackgroundColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.FormCadastro">
+    tools:context=".activity.cadastro.FormCadastro">
 
     <ScrollView
         android:layout_width="match_parent"

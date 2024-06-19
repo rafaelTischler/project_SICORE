@@ -18,6 +18,7 @@ import com.example.project_sicore.R
 import com.example.project_sicore.activity.Mapa.Mapa
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
@@ -87,8 +88,7 @@ class SplashScreen : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful && task.result != null) {
                         val location = task.result
-                        Log.d("teste", location.longitude.toString())
-                        Log.d("teste", location.latitude.toString())
+                        val localizacaUsuario = LatLng(location.latitude, location.longitude)
                         carregarMapa(location.latitude, location.longitude)
                     } else {
                         // Tratamento de erro

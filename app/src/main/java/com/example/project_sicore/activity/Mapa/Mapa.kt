@@ -18,6 +18,8 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMapOptions
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
@@ -27,6 +29,7 @@ class Mapa : AppCompatActivity() {
     data class Pontos(
         val nome: String,
         val latLng: LatLng,
+        val descricao: String,
         val endereco: String,
     )
 
@@ -43,28 +46,33 @@ class Mapa : AppCompatActivity() {
         }
 
         pegarPontosApi();
+        val localizacaoUsuario = LatLng(intent.getDoubleExtra("latitude",-23.563987), intent.getDoubleExtra("longitude", -46.653620))
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.mapa_fragment) as SupportMapFragment
-        val latitudeUsuario = intent.getDoubleExtra("latitude", 0.0)
-        val longitudeUsuario = intent.getDoubleExtra("longitude", 0.0)
+        val cameraPosition = CameraPosition.builder()
+            .target(localizacaoUsuario)
+            .zoom(10f)
+            .build()
+
+        val mapOption = GoogleMapOptions()
+            .camera(cameraPosition)
+
+        val mapFragment = SupportMapFragment.newInstance(mapOption)
+        supportFragmentManager.beginTransaction().replace(R.id.mapa_fragment, mapFragment).commit()
 
         mapFragment.getMapAsync { googleMap ->
             adicionarMarcadores(googleMap)
 
             googleMap.setOnMapLoadedCallback {
-                val bauds = LatLngBounds.builder()
-                val usuarioLocalizacao = LatLng(latitudeUsuario, longitudeUsuario)
-
-
-                val zoomLevel = 15f // Ajuste o nível de zoom conforme necessário
-                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(usuarioLocalizacao, zoomLevel)
-
-                googleMap.moveCamera(cameraUpdate)
-                googleMap.addMarker(
-                    MarkerOptions()
-                        .position(usuarioLocalizacao)
-                        .title("Usuario")
-                )
+//                val bauds = LatLngBounds.builder()
+//                val zoomLevel = 15f // Ajuste o nível de zoom conforme necessário
+//                val cameraUpdate = CameraUpdateFactory.newLatLngZoom(usuarioLocalizacao, zoomLevel)
+//
+//                googleMap.moveCamera(cameraUpdate)
+//                googleMap.addMarker(
+//                    MarkerOptions()
+//                        .position(usuarioLocalizacao)
+//                        .title("Usuario")
+//                )
 
             }
         }
@@ -74,11 +82,11 @@ class Mapa : AppCompatActivity() {
 
     private fun pegarPontosApi() {
         arrayPontos = arrayListOf(
-            Pontos(
-                "Ponto iffar",
-                LatLng(-29.7018462, -54.6987538),
-                " R. Vinte de Setembro, 2616 - São Vicente do Sul, RS, 97420-000"
-            )
+//            Pontos(
+//                "Ponto iffar",
+//                LatLng(-29.7018462, -54.6987538),
+//                " R. Vinte de Setembro, 2616 - São Vicente do Sul, RS, 97420-000"
+//            )
         )
     }
 
@@ -91,7 +99,10 @@ class Mapa : AppCompatActivity() {
                     .position(ponto.latLng)
 
             )
+
         }
+
+
     }
 
 

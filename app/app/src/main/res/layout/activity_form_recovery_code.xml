@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/BackgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    tools:context=".activity.recuperarConta.FormRecoveryCode">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/txt_sicore"
+            style="@style/TextView.BigTitle"
+            android:layout_marginTop="96dp"
+            android:text="@string/sicore"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="296dp" />
+
+        <TextView
+            android:id="@+id/txt_codigo_recuperacao"
+            style="@style/TextView.Title"
+            android:layout_marginTop="96dp"
+            android:text="@string/codigo_de_recuperacao"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_sicore"
+            app:layout_constraintWidth_max="296dp" />
+
+        <TextView
+            android:id="@+id/txt_info_recovery"
+            style="@style/Base.TextView"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:layout_marginEnd="48dp"
+            android:text="@string/info_recovery_code"
+            android:textAlignment="textStart"
+            android:textColor="@color/grey"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_codigo_recuperacao"
+            app:layout_constraintWidth_max="296dp" />
+
+        <EditText
+            android:id="@+id/edit_insert_code"
+            style="@style/Base.EditText"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="48dp"
+            android:autoLink="email"
+            android:autofillHints=""
+            android:hint="@string/codigo_de_recuperacao"
+            android:inputType="number"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_info_recovery"
+            app:layout_constraintWidth_max="296dp" />
+
+
+        <Button
+            android:id="@+id/btn_enviar"
+            style="@style/BaseButton"
+            android:layout_marginTop="48dp"
+            android:text="@string/enviar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_insert_code"
+            app:layout_constraintWidth_max="296dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

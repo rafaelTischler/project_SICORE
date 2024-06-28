@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <!--    INTERNET    -->
+    <!-- INTERNET -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--    LOCALIZACAO -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- LOCALIZACAO -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,16 +19,18 @@
         android:theme="@style/Theme.Project_SICORE"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
-        <!--
-            Pegar chave API
-         -->
+        <activity
+            android:name=".activity.cadastro.CadastroAktivity"
+            android:exported="false" />
+        <!--             Pegar chave API -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${GOOGLE_MAPS_API_KEY}"/>
+            android:value="${GOOGLE_MAPS_API_KEY}" />
+
         <activity
             android:name=".activity.Mapa.Mapa"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.temp.TELAMOSTRARRESULTADO"
             android:exported="false" />

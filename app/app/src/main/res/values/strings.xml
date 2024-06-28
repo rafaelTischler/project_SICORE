@@ -53,4 +53,6 @@
     <string name="depositante">Depositante</string>
     <string name="esta_com_duvida_deixenos_ajudar">Está com dúvida? Deixe-nos ajudar</string>
     <string name="numero">Número</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

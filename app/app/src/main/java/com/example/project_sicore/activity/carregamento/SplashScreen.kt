@@ -2,8 +2,12 @@ package com.example.project_sicore.activity.carregamento
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
@@ -17,12 +21,14 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.project_sicore.R
 import com.example.project_sicore.activity.Mapa.Mapa
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val PERMISSION_ID = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,78 +41,61 @@ class SplashScreen : AppCompatActivity() {
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        pegarLocalizacao()
-    }
 
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1
-    }
+        if (!isWiFiEnabled()){
+            Toast.makeText(this, "Por favor, ative o Wi-Fi.", Toast.LENGTH_LONG).show()
+            this.finish()
+        }
+        if (!isLocationEnabled()){
+            Toast.makeText(this, "Por favor, ative o GPS", Toast.LENGTH_LONG).show()
+        }else{
+            if (!checkPermission()) requestPermission()
+        }
 
+    }
+    // Função que é chamada automaticamente pelo android quando o usuario interage com a requisicao de localizacao.
+    // O "@SuppressLint("MissingPermission")" serve para que o fusedLocationClient permita ser executado sem o pedido de localizacap (Ja estamos pedindo antes)
+    @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(
         requestCode: Int,
-        permissions: Array<String>, grantResults: IntArray
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            LOCATION_PERMISSION_REQUEST_CODE -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    pegarLocalizacao()
-                } else {
-                    // Permissão negada, enviar localização como 0,0
-                    carregarMapa(0.0, 0.0)
-                }
-                return
-            }
-
-            else -> {
-                // Outros códigos de erro
+        if (requestCode == PERMISSION_ID){
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY,null)
+                        .addOnSuccessListener { location: Location ->
+                            makeOtherAktivity(location.latitude, location.longitude)
+                        }
             }
         }
     }
 
-    private fun pegarLocalizacao() {
-        val localizacaoPrecisaCondicao = ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-        val localizacaoAproximadaCondicao = ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-        if (localizacaoPrecisaCondicao || localizacaoAproximadaCondicao) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
-        } else {
-            fusedLocationClient.lastLocation
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful && task.result != null) {
-                        val location = task.result
-                        Log.d("teste", location.longitude.toString())
-                        Log.d("teste", location.latitude.toString())
-                        carregarMapa(location.latitude, location.longitude)
-                    } else {
-                        // Tratamento de erro
-                        Log.d("teste", "Erro ao obter localização")
-                        carregarMapa(0.0, 0.0)
-                    }
-                }
+    private fun makeOtherAktivity(latitude: Double, longitude: Double){
+        val i = Intent(this@SplashScreen, Mapa::class.java).apply {
+            putExtra("latitude", latitude)
+            putExtra("longitude", longitude)
         }
+        startActivity(i)
+        finish()
     }
 
-    private fun carregarMapa(latitude: Double, longitude: Double) {
-        android.os.Handler(Looper.getMainLooper()).postDelayed({
-            val i = Intent(this@SplashScreen, Mapa::class.java).apply {
-                putExtra("latitude", latitude)
-                putExtra("longitude", longitude)
-            }
-            startActivity(i)
-            finish()
-        }, 1500)
+    private fun isLocationEnabled(): Boolean{
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
+    private fun isWiFiEnabled(): Boolean{
+        val wifiManager = this.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        return wifiManager.isWifiEnabled
+    }
+
+    private fun checkPermission() : Boolean{
+        return ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestPermission(){
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_ID)
     }
 }
